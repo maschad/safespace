@@ -1,4 +1,4 @@
-package com.safuspace;
+package com.safespace;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "Safu Space";
+        return "safespace";
     }
 }

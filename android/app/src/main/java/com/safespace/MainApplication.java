@@ -1,4 +1,4 @@
-package com.safuspace;
+package com.safespace;
 
 import android.app.Application;
 

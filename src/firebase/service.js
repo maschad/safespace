@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase'
 class FirebaseService {
   constructor() {
-    this.ref = firebase.firestore().collection('Account')
+    this.ref = firebase.firestore().collection('Accounts')
   }
 async load(id) {
     const doc = await this.ref.doc(id).get()
