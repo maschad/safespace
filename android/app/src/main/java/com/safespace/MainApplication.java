@@ -1,4 +1,4 @@
-package com.ethereumwallet;
+package com.safespace;
 
 import android.app.Application;
 
