@@ -1,12 +1,13 @@
 import React from 'react';
 import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { HeaderIcon } from '@components/widgets';
+import { HeaderIcon, Button } from '@components/widgets';
 import { colors, measures } from '@common/styles';
 import { General as GeneralActions, Wallets as WalletActions, Prices as PricesActions } from '@common/actions';
 import NoWallets from './NoWallets';
 import TotalBalance from './TotalBalance';
 import WalletCard from './WalletCard';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 @inject('prices', 'wallets')
 @observer
@@ -56,6 +57,10 @@ export class WalletsOverview extends React.Component {
         this.props.navigation.navigate('WalletDetails', { wallet });
     }
 
+    onPressCreateBounty = () => {
+        this.props.navigation.navigate('CreateBounty');
+    }
+
     renderItem = ({ item }) => <WalletCard wallet={item} onPress={() => this.onPressWallet(item)} />
 
     renderBody = (list) => (!list.length && !this.loading) ? <NoWallets /> : (
@@ -73,6 +78,7 @@ export class WalletsOverview extends React.Component {
             <View style={styles.container}>
                 <TotalBalance wallets={list} />
                 {this.renderBody(list)}
+                <Button onPress={this.onPressCreateBounty}/>
             </View>
         );
     }

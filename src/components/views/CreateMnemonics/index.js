@@ -23,6 +23,7 @@ export class CreateMnemonics extends React.Component {
 
     renderMnemonic = (mnemonic, index) => (
         <View style={styles.mnemonic} key={index}>
+            <TextBullet>{index + 1}</TextBullet>
             <TextBullet>{mnemonic}</TextBullet>
         </View>
     );
