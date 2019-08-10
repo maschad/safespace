@@ -25,7 +25,8 @@ const navigator = createStackNavigator(
     Settings: { screen: Views.Settings },
     ShowPrivateKey: { screen: Views.ShowPrivateKey },
     WalletDetails: { screen: Views.WalletDetails },
-    WalletsOverview: { screen: Views.WalletsOverview }
+    WalletsOverview: { screen: Views.WalletsOverview },
+    CreateBounty: { screen: Views.CreateBounty }
   },
   {
     initialRouteName: INITIAL_ROUTE,
