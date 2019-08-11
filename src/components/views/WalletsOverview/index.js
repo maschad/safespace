@@ -1,7 +1,7 @@
 import React from 'react';
-import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet } from 'react-native';
 import { inject, observer } from 'mobx-react';
-import { HeaderIcon, Button } from '@components/widgets';
+import { HeaderIcon } from '@components/widgets';
 import { colors, measures } from '@common/styles';
 import { General as GeneralActions, Wallets as WalletActions, Prices as PricesActions } from '@common/actions';
 import NoWallets from './NoWallets';
@@ -9,13 +9,17 @@ import TotalBalance from './TotalBalance';
 import WalletCard from './WalletCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { BountyList } from '../SafeSpace/BountyList';
+import { Body, Container, Content } from 'native-base';
+
+// External libraries
+import * as _ from 'lodash';
 
 @inject('prices', 'wallets')
 @observer
 export class WalletsOverview extends React.Component {
 
     static navigationOptions = ({ navigation, screenProps }) => ({
-        title: 'Overview',
+        title: 'Safe Space',
         headerLeft: (
             <HeaderIcon
                 name='add'
@@ -78,23 +82,21 @@ export class WalletsOverview extends React.Component {
     render() {
         const { list } = this.props.wallets;
         return (
-            <View style={styles.container}>
-                <TotalBalance wallets={list} />
-                {this.renderBody(list)}
-                <BountyList/>
-
-                <Button onPress={this.onPressCreateBounty}/>
-            </View>
+            <Container>
+                <Body>
+                    <Content padder>
+                    { _.isEmpty(list) ? null : <TotalBalance wallets={list} />}
+                        {this.renderBody(list)}
+                    </Content>
+                </Body>
+            </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        padding: measures.defaultPadding,
-        alignItems: 'stretch',
-        justifyContent: 'flex-start'
+        backgroundColor: colors.grey
     },
     content: {
         marginTop: measures.defaultMargin
