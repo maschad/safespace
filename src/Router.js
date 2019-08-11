@@ -7,7 +7,7 @@ import {
 import * as Views from './components/views';
 import { colors } from './common/styles';
 
-export const INITIAL_ROUTE = 'WalletsOverview';
+export const INITIAL_ROUTE = 'GetStarted';
 
 const navigator = createStackNavigator(
   {
@@ -26,16 +26,14 @@ const navigator = createStackNavigator(
     ShowPrivateKey: { screen: Views.ShowPrivateKey },
     WalletDetails: { screen: Views.WalletDetails },
     WalletsOverview: { screen: Views.WalletsOverview },
-    CreateBounty: { screen: Views.CreateBounty }
+    CreateBounty: { screen: Views.CreateBounty },
+    GetStarted: { screen: Views.GetStarted }
   },
   {
     initialRouteName: INITIAL_ROUTE,
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: colors.primary
-      },
-      headerTintColor: colors.secondary,
-      tintColor: colors.secondary
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
     }
   }
 );

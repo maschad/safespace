@@ -10,6 +10,11 @@ export class CreateMnemonics extends React.Component {
 
     state = { mnemonics: null };
 
+    componentDidMount(){
+        const mnemonics = WalletUtils.generateMnemonics();
+        this.setState({ mnemonics });
+    }
+
     onPressProceed() {
         const { mnemonics } = this.state;
         const { walletName, walletDescription } = this.props.navigation.state.params;
@@ -30,12 +35,13 @@ export class CreateMnemonics extends React.Component {
 
     renderBody() {
         const { mnemonics } = this.state;
-        if (!mnemonics) return <Button onPress={() => this.onPressReveal()}>Reveal</Button>;
+        if (mnemonics) {
         return (
             <View style={styles.mnemonicsContainer}>
                 {mnemonics.map(this.renderMnemonic)}
             </View>
         );
+        }
     }
 
     render() {
