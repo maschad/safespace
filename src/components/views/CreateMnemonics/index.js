@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Container, Content, Button, Text } from 'native-base';
+import { Button, Card, Container, Content, Footer, Text } from 'native-base';
 import { Wallet as WalletUtils } from '@common/utils';
 import { colors, measures } from '@common/styles';
 
@@ -22,11 +22,12 @@ export class CreateMnemonics extends React.Component {
     }
 
     renderMnemonic = (mnemonic, index) => (
-        <Container style={styles.mnemonic} key={index}>
-            <Button dark>
-                <Text>{index + 1}{mnemonic}</Text>
+        <View style={styles.mnemonic} key={index}>
+            <Button dark rounded>
+                <Text style={{ fontSize: 10, lineHeight: 22}}>{index + 1}</Text>
+                <Text style={styles.text}>{mnemonic}</Text>
             </Button>
-        </Container>
+        </View>
     );
 
     renderBody() {
@@ -43,13 +44,19 @@ export class CreateMnemonics extends React.Component {
         return (
             <Container>
                 <Content>
-                    <Text style={styles.message}>Save carefully your sequence of mnemonics:</Text>
+                    <Card>
+                        <Text style={styles.message}>Here's a list of words.</Text>
+                        <Text style={styles.message}>You'll need to use this as your <Text style={{ fontWeight: 'bold' }}></Text>secure password.</Text>
+                        <Text style={styles.message}>Save it.</Text> 
+                    </Card>
                     {this.renderBody()}
-                    <View style={styles.buttonsContainer}>
-                        {this.state.mnemonics && (
-                            <Button onPress={() => this.onPressProceed()} dark><Text>Proceed</Text></Button>
-                        )}
-                    </View>
+                    <Footer>
+                        <View style={styles.buttonsContainer}>
+                            {this.state.mnemonics && (
+                                <Button onPress={() => this.onPressProceed()} dark><Text style={styles.text}>Proceed</Text></Button>
+                            )}
+                        </View>
+                    </Footer>
                 </Content>
             </Container>
         );
@@ -84,5 +91,9 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'flex-end',
         height: 104
+    },
+    text: {
+        fontSize: 10,
+        color: 'white'
     }
 });
