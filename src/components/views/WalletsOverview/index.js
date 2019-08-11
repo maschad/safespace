@@ -8,6 +8,7 @@ import NoWallets from './NoWallets';
 import TotalBalance from './TotalBalance';
 import WalletCard from './WalletCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { BountyList } from '../SafeSpace/BountyList';
 
 @inject('prices', 'wallets')
 @observer
@@ -72,12 +73,16 @@ export class WalletsOverview extends React.Component {
             renderItem={this.renderItem} />
     );
 
+    
+
     render() {
         const { list } = this.props.wallets;
         return (
             <View style={styles.container}>
                 <TotalBalance wallets={list} />
                 {this.renderBody(list)}
+                <BountyList/>
+
                 <Button onPress={this.onPressCreateBounty}/>
             </View>
         );
