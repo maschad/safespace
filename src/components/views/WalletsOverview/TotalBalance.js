@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { colors, measures } from '@common/styles';
 import { Wallet as WalletUtils } from '@common/utils';
+import { Card, CardItem, Body, Left, Right } from 'native-base';
 
 @inject('prices')
 @observer
@@ -23,47 +24,37 @@ export default class TotalBalance extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.leftColumn}>
-                    <Text style={styles.title}>Total balance:</Text>
-                </View>
-                <View style={styles.rightColumn}>
-                    <Text style={styles.balance}>ETH {this.balance.toFixed(3)}</Text>
+            <Card>
+                <CardItem header>
+                    <Left>
+                        <Text style={styles.title}>Your wallet: </Text>
+                    </Left>
+                </CardItem>
+                <CardItem>
+                    <Body>
+                        <Text style={styles.balance}>ETH {this.balance.toFixed(3)}</Text>
+                    </Body>
+                </CardItem>
+                <CardItem footer>
                     <Text style={styles.fiatBalance}>US$ {this.fiatBalance.toFixed(2)}</Text>
-                </View>
-            </View>
+                </CardItem>
+            </Card>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        height: 60,
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        borderBottomColor: colors.lightGray
-    },
-    leftColumn: {
-        flex: 1
-    },
     title: {
-        fontSize: measures.fontSizeLarge,
-        color: colors.gray
+        fontSize: measures.fontSize,
+        color: colors.black
     },
     balance: {
-        fontSize: measures.fontSizeMedium + 2,
+        fontSize: measures.fontSizeMedium + 10,
         fontWeight: 'bold',
-        color: colors.gray
+        color: colors.black
     },
     fiatBalance: {
         fontSize: measures.fontSizeMedium - 3,
         color: colors.gray
-    },
-    rightColumn: {
-        flex: 1,
-        alignItems: 'flex-end',
-        justifyContent: 'center'
     }
 });

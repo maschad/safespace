@@ -36,7 +36,7 @@ export default class Application extends React.Component {
         return (
             <Provider {...stores}>
                 <View style={styles.container}>
-                    <StatusBar {...STATUSBAR_CONFIG} />
+                    {/* <StatusBar {...STATUSBAR_CONFIG} /> */}
                     <Router />
                 </View>
             </Provider>
@@ -46,9 +46,6 @@ export default class Application extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.defaultBackground,
-        flex: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center'
+       flex: 1
     }
 });
