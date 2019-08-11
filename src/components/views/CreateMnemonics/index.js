@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, TextBullet } from '@components/widgets';
+import { StyleSheet, View } from 'react-native';
+import { Container, Content, Button, Text } from 'native-base';
 import { Wallet as WalletUtils } from '@common/utils';
 import { colors, measures } from '@common/styles';
 
@@ -22,15 +22,16 @@ export class CreateMnemonics extends React.Component {
     }
 
     renderMnemonic = (mnemonic, index) => (
-        <View style={styles.mnemonic} key={index}>
-            <TextBullet>{index + 1}</TextBullet>
-            <TextBullet>{mnemonic}</TextBullet>
-        </View>
+        <Container style={styles.mnemonic} key={index}>
+            <Button dark>
+                <Text>{index + 1}{mnemonic}</Text>
+            </Button>
+        </Container>
     );
 
     renderBody() {
         const { mnemonics } = this.state;
-        if (!mnemonics) return <Button onPress={() => this.onPressReveal()}>Reveal</Button>;
+        if (!mnemonics) return <Button onPress={() => this.onPressReveal()} dark><Text>Reveal</Text></Button>;
         return (
             <View style={styles.mnemonicsContainer}>
                 {mnemonics.map(this.renderMnemonic)}
@@ -40,16 +41,17 @@ export class CreateMnemonics extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View />
-                <Text style={styles.message}>Save carefully your sequence of mnemonics:</Text>
-                {this.renderBody()}
-                <View style={styles.buttonsContainer}>
-                    {this.state.mnemonics && (
-                        <Button onPress={() => this.onPressProceed()}>Proceed</Button>
-                    )}
-                </View>
-            </View>
+            <Container>
+                <Content>
+                    <Text style={styles.message}>Save carefully your sequence of mnemonics:</Text>
+                    {this.renderBody()}
+                    <View style={styles.buttonsContainer}>
+                        {this.state.mnemonics && (
+                            <Button onPress={() => this.onPressProceed()} dark><Text>Proceed</Text></Button>
+                        )}
+                    </View>
+                </Content>
+            </Container>
         );
     }
 }

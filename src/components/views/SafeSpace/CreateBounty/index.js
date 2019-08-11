@@ -10,8 +10,7 @@ export class CreateBounty extends React.Component {
     
     
     onPressCreate() {
-        // const { walletName, walletDescription } = this.props.navigation.state.params;
-        // this.props.navigation.navigate('CreateWallet', { walletName, walletDescription });
+        const { walletName, walletDescription } = this.props.navigation.state.params;
     }
 
 
@@ -31,8 +30,8 @@ export class CreateBounty extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.defaultBackground,
-        // alignItems: 'stretch',
-        // justifyContent: 'space-between',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
         flex: 1,
         padding: measures.defaultPadding,
     },
