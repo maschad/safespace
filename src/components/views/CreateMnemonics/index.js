@@ -27,6 +27,10 @@ export class CreateMnemonics extends React.Component {
     });
   }
 
+  _onPressContinue = () => {
+    this.props.navigation.navigate("WalletsOverview");
+  }
+
   onPressReveal() {
     const mnemonics = WalletUtils.generateMnemonics();
     this.setState({ mnemonics });
@@ -56,9 +60,9 @@ export class CreateMnemonics extends React.Component {
     return (
       <Container style={styles.container}>
         <Content>
-            <View style={styles.}>
-                <Text>Your Password</Text>
-                <Text>Has Been Genereted</Text>
+            <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>Your Password</Text>
+                <Text style={styles.titleText}>Has Been Genereted</Text>
             </View>
           <Card style={styles.card}>
             <Text style={styles.message}>
@@ -73,9 +77,9 @@ export class CreateMnemonics extends React.Component {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={this._onPressGetStarted}
+          onPress={this._onPressContinue}
         >
-          <Text style={styles.buttonText}>Continues</Text>
+          <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </Container>
     );
@@ -87,8 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flex: 1,
-    backgroundColor: colors.defaultBackground,
-    padding: measures.defaultPadding
+    backgroundColor: colors.defaultBackground
   },
   message: {
     color: colors.black,
@@ -111,6 +114,17 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-end",
     height: 104
+  },
+  titleContainer: {
+    backgroundColor: '#000000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 50
+  },
+  titleText: {
+   fontSize: 20,
+   color: '#fff',
+   opacity: 0.8
   },
   text: {
     fontSize: 10,
