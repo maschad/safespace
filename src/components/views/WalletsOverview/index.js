@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 import { inject, observer } from 'mobx-react';
 import { HeaderIcon } from '@components/widgets';
 import { colors, measures } from '@common/styles';
@@ -7,7 +7,6 @@ import { General as GeneralActions, Wallets as WalletActions, Prices as PricesAc
 import NoWallets from './NoWallets';
 import TotalBalance from './TotalBalance';
 import WalletCard from './WalletCard';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { BountyList } from '../SafeSpace/BountyList';
 import { Body, Container, Content, Button } from 'native-base';
 
@@ -82,14 +81,10 @@ export class WalletsOverview extends React.Component {
     render() {
         const { list } = this.props.wallets;
         return (
-            <Container>
-                <Body>
-                    <Content padder>
+            <View style={{flex: 1}}>
                     { _.isEmpty(list) ? null : <TotalBalance wallets={list} />}
-                        {this.renderBody(list)}
-                    </Content>
-                </Body>
-            </Container>
+                    <BountyList {...this.props} prices={{'usd' : 210.00}} />
+            </View>
         );
     }
 }

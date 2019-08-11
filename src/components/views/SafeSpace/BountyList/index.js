@@ -1,31 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList } from 'react-native';
-import firebase from 'react-native-firebase';
-import { Button } from '@components/widgets';
-import { FormInput } from '@components/widgets/SafeSpace/FormInput';
+import { StyleSheet, Image, View, TextInput, FlatList } from 'react-native';
 import { colors, measures } from '@common/styles';
-import { firebaseService } from '../../../../firebase/service';
+import { Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Text } from 'native-base';
 
 export class BountyList extends React.Component {
   state = {
-    bounties: [],
+    bounties: [
+      {
+        title: 'Dalton James is wanted for robbery',
+        image: 'https://i.redd.it/elvci10jmub21.jpg',
+        total: '5'
+      },
+      {
+        title: 'Kellon Davis is wanted for Arson',
+        image: 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwivjO-_7vrjAhVTZM0KHXy_Co0QjRx6BAgBEAQ&url=https%3A%2F%2Fwww.kisspng.com%2Fpng-user-computer-icons-gravatar-blog-happy-woman-1025974%2F&psig=AOvVaw3Ek1EqY2XIJuHvMap15W50&ust=1565614425327456',
+        total: '10'
+      }
+    ],
   };
 
-  refresh = () => {
-    firebaseService.getAllBounties().then(item => {
-      global.console.log('item', item);
-        this.setState({bounties: this.addkeysToBounty(item)});
-    });
-  };
+  fiatBalance(balance) {
+    return Number(this.props.prices.usd * balance);
+  }
 
   addkeysToBounty = bounties => {
-      return bounties.map(bounty =>{
-          return Object.assign(bounty, {key: bounty.walletAddress})
+      return bounties.map((bounty, index) =>{
+          return Object.assign(bounty, {key: index})
       })
   }
 
-  componentDidMount() {
-    this.refresh()
+  onPressMakeFund = () => {
+    this.props.navigation.navigate('SendCoins', {...this.props});
   }
 
 
@@ -35,12 +40,19 @@ export class BountyList extends React.Component {
 
   renderItem = ({item}) => {
       return (
-          <View>
-            <Text>{item.title}</Text>
-             <Text>{item.description}</Text>
-             <Text>{item.category}</Text>
-             <Text>{item.walletAddress}</Text>
-          </View>      
+        <ListItem avatar onPress={this.onPressMakeFund}>
+        <Left>
+          <Thumbnail source={{ uri: item.image }} />
+        </Left>
+        <Body>
+          <Text>{item.title}</Text>
+          <Text note>Doing what you like will always keep you happy . .</Text>
+        </Body>
+        <Right>
+          <Text note>{item.total} ETH</Text>
+          <Text note>{this.fiatBalance(item.total).toFixed(2)} $USD</Text> 
+        </Right>
+      </ListItem>   
       );
   }
   render() {
@@ -56,8 +68,6 @@ export class BountyList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.defaultBackground,
-    // alignItems: 'stretch',
-    // justifyContent: 'space-between',
     flex: 1,
     padding: measures.defaultPadding,
   },
