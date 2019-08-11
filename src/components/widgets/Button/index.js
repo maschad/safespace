@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         borderColor: colors.secondary,
         padding: measures.defaultPadding,
-        borderRadius: 4
+        borderRadius: 30
     },
     title: {
         color: colors.secondary,

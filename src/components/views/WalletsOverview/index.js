@@ -9,7 +9,7 @@ import TotalBalance from './TotalBalance';
 import WalletCard from './WalletCard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { BountyList } from '../SafeSpace/BountyList';
-import { Body, Container, Content } from 'native-base';
+import { Body, Container, Content, Button } from 'native-base';
 
 // External libraries
 import * as _ from 'lodash';

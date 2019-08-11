@@ -47,8 +47,8 @@ export class CreateBounty extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.defaultBackground,
-        // alignItems: 'stretch',
-        // justifyContent: 'space-between',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
         flex: 1,
         padding: measures.defaultPadding,
     },
