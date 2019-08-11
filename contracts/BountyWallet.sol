@@ -49,7 +49,7 @@ contract BountyWallet {
         informants.push(msg.sender);
     }
 
-    function getInformants () public view returns (address[] memory)  {
+    function getInformants () public view  onlyCreator returns (address[] memory)  {
         return informants;
     }
 
