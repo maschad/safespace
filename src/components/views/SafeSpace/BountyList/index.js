@@ -6,8 +6,6 @@ import { FormInput } from '@components/widgets/SafeSpace/FormInput';
 import { colors, measures } from '@common/styles';
 import { firebaseService } from '../../../../firebase/service';
 
-import BountyItem from "../BountyItem"
-
 export class BountyList extends React.Component {
   state = {
     bounties: [],
@@ -37,13 +35,12 @@ export class BountyList extends React.Component {
 
   renderItem = ({item}) => {
       return (
-          <BountyItem title={item.title} description={item.description} category={item.category} walletAddress={item.walletAddress}/>
-        //   <View>
-        //     <Text>{item.title}</Text>
-        //      <Text>{item.description}</Text>
-        //      <Text>{item.category}</Text>
-        //      <Text>{item.walletAddress}</Text>
-        //   </View>      
+          <View>
+            <Text>{item.title}</Text>
+             <Text>{item.description}</Text>
+             <Text>{item.category}</Text>
+             <Text>{item.walletAddress}</Text>
+          </View>      
       );
   }
   render() {
