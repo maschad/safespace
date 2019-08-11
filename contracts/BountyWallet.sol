@@ -14,27 +14,30 @@ contract BountyWallet {
     // Informants
     address[] public informants;
 
-
     // Set to true at the end, disallows any change.
     // By default initialized to `false`.
     bool ended;
 
-    struct Bounty {
-        string name;
-        address creator;
+    // Creator of the bounty
+    address creator;
+
+    modifier onlyCreator() {
+         require(
+            msg.sender == creator,
+            "Only creator can call this."
+        );
+        _;
     }
     
     event NewBountyWallet(string name, uint total, address wallet);
     event BountyIncreased(uint amount);
     event BountyEnded(address winner, uint total);
 
-    constructor(
-        string memory _name,
-        uint _total
-    ) public {
-        name = _name;
-        total = _total;
+    function createBounty(string memory _name) public {
+        creator = msg.sender;
         ended = false;
+        name = _name;
+        total = 0;
     }
 
     function recieveFunds() public payable {
@@ -46,7 +49,11 @@ contract BountyWallet {
         informants.push(msg.sender);
     }
 
-    function setWinner (address payable _winner) public {
+    function getInformants () public view returns (address[] memory)  {
+        return informants;
+    }
+
+    function setWinner (address payable _winner) public onlyCreator {
         winner = _winner;
         bountyEnd();
     }
